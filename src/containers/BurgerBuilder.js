@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 
 import Wrapper from '../hoc/Wrapper';
+import Modal from '../components/UI/Modal';
+
 import BurgerPreview from '../components/Burger/Preview/BurgerPreview';
 import BuildControls from '../components/Burger/Controls/BuildControls';
+import OrderSummary from '../components/Burger/OrderSummary';
 
 const INGREDIENT_PRICE = {
 	cheese: 0.5,
@@ -20,7 +23,8 @@ class BurgerBuilder extends Component {
 			bacon: 0
 		},
 		totalPrice: 4,
-		purchasable: false
+		purchasable: false,
+		purchasing: false
 	}
 
 	updatePurchasable = () => {
@@ -58,15 +62,20 @@ class BurgerBuilder extends Component {
 	}
 
 	render() {
+		const { ingredients, totalPrice, purchasable } = this.state;
+
 		return (
 			<Wrapper>
-				<BurgerPreview ingredients={this.state.ingredients}/>
+				<Modal>
+					<OrderSummary ingredients={ingredients}/>
+				</Modal>
+				<BurgerPreview ingredients={ingredients}/>
 				<BuildControls
-					ingredients={this.state.ingredients}
+					ingredients={ingredients}
 					removeIngredient={this.removeIngredient}
 					addIngredient={this.addIngredient}
-					price={this.state.totalPrice}
-					purchasable={this.state.purchasable} />
+					price={totalPrice}
+					purchasable={purchasable} />
 			</Wrapper>
 		);
 	}

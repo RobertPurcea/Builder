@@ -28,7 +28,8 @@ const BuildControls = ({
 			ingredientName={ingredientName}
 			removeIngredient={removeIngredient}
 			addIngredient={addIngredient}
-			disabled={ingredients[ingredientName] === 0} />
+			disabled={ingredients[ingredientName] === 0}
+			key={ingredientName} />
 	));
 
 	return (
