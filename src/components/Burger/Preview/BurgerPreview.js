@@ -4,18 +4,22 @@ import styled from 'styled-components';
 import BurgerIngredient from './BurgerIngredient';
 
 const BurgerWrapper = styled.div`
-	width: 100%;
+	width: 70%;
 	margin: auto;
-	height: 250px;
-	overflow: scroll;
+	height: 300px;
 	text-align: center;
 	font-weight: bold;
 	font-size: 1.2rem;
 
 	@media (min-width: 500px) and (min-height: 400px) {
 		width: 350px;
-		height: 300px;
+		height: 350px;
 	}
+`;
+
+const NoIngredientsMessage = styled.p`
+	width: 80%;
+	margin: auto;
 `;
 
 const BurgerPreview = ({ ingredients }) => {
@@ -38,7 +42,11 @@ const BurgerPreview = ({ ingredients }) => {
 	return (
 		<BurgerWrapper>
 			<BurgerIngredient type='bread-top' />
-			{ingredientComponents.length ? ingredientComponents : <p>Please start adding ingredients</p>}
+			{
+				ingredientComponents.length 
+					? ingredientComponents
+					: <NoIngredientsMessage>Please start adding ingredients</NoIngredientsMessage>
+			}
 			<BurgerIngredient type='bread-bottom' />
 		</BurgerWrapper>
 	);

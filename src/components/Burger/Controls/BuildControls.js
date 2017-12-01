@@ -10,14 +10,24 @@ const Wrapper = styled.div`
 	flex-flow: column;
 	align-items: center;
 	box-shadow: 0 2px 1px #ccc;
+
 	margin: auto;
 	padding: 10px 0;
 `;
 
-const BuildControls = (props) => {
+const BuildControls = ({ ingredients, removeIngredient, addIngredient, price }) => {
+	const controlComponents = Object.keys(ingredients).map(ingredientName => (
+		<BuildControl
+			ingredientName={ingredientName}
+			lessIngredientHandler={removeIngredient}
+			moreIngredientHandler={addIngredient}
+			disabled={ingredients[ingredientName] === 0} />
+	));
+
 	return (
 		<Wrapper>
-			<BuildControl />
+			<p>Current Price: <strong>{price.toFixed(2)}</strong></p>
+			{ controlComponents }
 		</Wrapper>
 	);
 }
