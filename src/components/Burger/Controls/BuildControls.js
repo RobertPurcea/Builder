@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import BuildControl from './BuildControl';
+import OrderButton from './OrderButton';
 
 const Wrapper = styled.div`
 	width: 100%;
@@ -15,19 +16,26 @@ const Wrapper = styled.div`
 	padding: 10px 0;
 `;
 
-const BuildControls = ({ ingredients, removeIngredient, addIngredient, price }) => {
-	const controlComponents = Object.keys(ingredients).map(ingredientName => (
+const BuildControls = ({
+	ingredients,
+	removeIngredient,
+	addIngredient,
+	price,
+	purchasable
+}) => {
+	const ingredientControls = Object.keys(ingredients).map(ingredientName => (
 		<BuildControl
 			ingredientName={ingredientName}
-			lessIngredientHandler={removeIngredient}
-			moreIngredientHandler={addIngredient}
+			removeIngredient={removeIngredient}
+			addIngredient={addIngredient}
 			disabled={ingredients[ingredientName] === 0} />
 	));
 
 	return (
 		<Wrapper>
 			<p>Current Price: <strong>{price.toFixed(2)}</strong></p>
-			{ controlComponents }
+			{ ingredientControls }
+			<OrderButton disabled={!purchasable}>ORDER NOW</OrderButton>
 		</Wrapper>
 	);
 }

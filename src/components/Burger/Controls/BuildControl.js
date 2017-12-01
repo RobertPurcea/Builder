@@ -52,18 +52,18 @@ const Button = styled.button`
 
 const BuildControl = ({
 	ingredientName,
-	lessIngredientHandler,
-	moreIngredientHandler,
+	removeIngredient,
+	addIngredient,
 	disabled
 }) => (
 	<Wrapper>
 		<Ingredient>{ capitalize(ingredientName) }</Ingredient>
 		<ButtonWrapper>
-			<Button type='more' onClick={() => moreIngredientHandler(ingredientName)}>More</Button>
+			<Button type='more' onClick={() => addIngredient(ingredientName)}>More</Button>
 			<Button
 				type='less'
 				disabled={disabled}
-				onClick={() => lessIngredientHandler(ingredientName)}>Less</Button>
+				onClick={() => removeIngredient(ingredientName)}>Less</Button>
 		</ButtonWrapper>
 	</Wrapper>
 );
