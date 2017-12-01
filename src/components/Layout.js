@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled, { injectGlobal } from 'styled-components';
 
-import Aux from '../hoc/Aux';
+import Wrapper from '../hoc/Wrapper';
 
 injectGlobal`
 	body {
@@ -17,10 +17,10 @@ const Main = styled.main`
 
 const Layout = (props) => {
 	return (
-		<Aux>
+		<Wrapper>
 			<div>Toolbar, backdrop, sidedrawer</div>
 			<Main>{props.children}</Main>
-		</Aux>
+		</Wrapper>
 	);
 }
 
