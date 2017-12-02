@@ -21,7 +21,8 @@ const BuildControls = ({
 	removeIngredient,
 	addIngredient,
 	price,
-	purchasable
+	purchasable,
+	openPurchaseMode
 }) => {
 	const ingredientControls = Object.keys(ingredients).map(ingredientName => (
 		<BuildControl
@@ -36,7 +37,9 @@ const BuildControls = ({
 		<Wrapper>
 			<p>Current Price: <strong>{price.toFixed(2)}</strong></p>
 			{ ingredientControls }
-			<OrderButton disabled={!purchasable}>ORDER NOW</OrderButton>
+			<OrderButton
+				disabled={!purchasable}
+				onClick={openPurchaseMode}>ORDER NOW</OrderButton>
 		</Wrapper>
 	);
 }

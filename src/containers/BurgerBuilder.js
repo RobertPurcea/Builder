@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import Wrapper from '../hoc/Wrapper';
 import Modal from '../components/UI/Modal';
+import Backdrop from '../components/UI/Backdrop';
 
 import BurgerPreview from '../components/Burger/Preview/BurgerPreview';
 import BuildControls from '../components/Burger/Controls/BuildControls';
@@ -24,9 +25,25 @@ class BurgerBuilder extends Component {
 		},
 		totalPrice: 4,
 		purchasable: false,
-		purchasing: false
+		purchaseMode: false
 	}
 
+	openPurchaseMode = () => {
+		this.setState(prevState => ({
+			purchaseMode: true
+		}))
+	}
+
+	cancelPurchase = () => {
+		this.setState(prevState => ({
+			purchaseMode: false
+		}))
+	}
+
+	continuePurchase = () => {
+		alert("You continued");
+	}
+	
 	updatePurchasable = () => {
 		const { ingredients } = this.state;
 
@@ -62,20 +79,28 @@ class BurgerBuilder extends Component {
 	}
 
 	render() {
-		const { ingredients, totalPrice, purchasable } = this.state;
+		const { ingredients, totalPrice, purchasable, purchaseMode } = this.state;
 
 		return (
 			<Wrapper>
-				<Modal>
-					<OrderSummary ingredients={ingredients}/>
+				<Modal show={purchaseMode}>
+					<OrderSummary
+						ingredients={ingredients}
+						price={totalPrice}
+						continueHandler={this.continuePurchase}
+						cancelHandler={this.cancelPurchase}
+						/>
 				</Modal>
+				<Backdrop show={purchaseMode} onClick={this.cancelPurchase} />
+
 				<BurgerPreview ingredients={ingredients}/>
 				<BuildControls
 					ingredients={ingredients}
 					removeIngredient={this.removeIngredient}
 					addIngredient={this.addIngredient}
 					price={totalPrice}
-					purchasable={purchasable} />
+					purchasable={purchasable}
+					openPurchaseMode={this.openPurchaseMode} />
 			</Wrapper>
 		);
 	}

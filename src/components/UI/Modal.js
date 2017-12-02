@@ -1,7 +1,6 @@
-import React from 'react';
 import styled from 'styled-components';
 
-const StyledModal = styled.aside`
+const Modal = styled.section`
 	position: fixed;
 	z-index: 500;
 	background-color: white;
@@ -13,13 +12,13 @@ const StyledModal = styled.aside`
 	top: 30%;
 	box-sizing: border-box;
 	transition: all 0.3s ease-out;
+	transform: ${props => props.show ? 'translateY(0)' : 'translateY(-100vw)'};
+	opacity: ${({show}) => show ? '1' : '0'};
 
 	@media (min-width: 600px) {
 		width: 500px;
 		left: calc(50% - 250px);
 	}
 `;
-
-const Modal = props => <StyledModal>{props.children}</StyledModal>;
 
 export default Modal;
